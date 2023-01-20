@@ -6,6 +6,7 @@ const router = require("express").Router();
 
 //Hago las rutas
 router.get("/", indexController.home);
+router.get("/institutos", indexController.institutos)
 
 
 //Exporto el router
