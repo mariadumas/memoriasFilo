@@ -22,12 +22,23 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tablename: "beca",
+        tableName: "beca",
         timestamps: false
     }
-    
-    
-   const Beca = sequelize.define(alias, cols, config)
+
+
+    const Beca = sequelize.define(alias, cols, config)
+
+    Beca.associate = (models) => {
+        Beca.hasOne(models.ProyectoTesis, {
+            as: "becaProyectoTesis",
+            foreignKey: "beca_id"
+        })
+        Beca.belongsTo(models.Institucion, {
+            as: "becaInstitucion",
+            foreignKey: "institucion_id"
+        })
+    }
 
 
     return Beca;

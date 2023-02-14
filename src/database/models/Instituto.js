@@ -59,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        freezeTableName: true,
+        tableName: "instituto",
         timestamps: false
     }
 
@@ -73,8 +73,24 @@ module.exports = (sequelize, DataTypes) => {
 
         Instituto.hasMany(models.Integrante, {
             as: "institutoIntegrante",
+            foreignKey: "instituto1"
+        })
+        Instituto.hasMany(models.Integrante, {
+            as: "institutoIntegrante2",
+            foreignKey: "instituto2"
+        })
+        Instituto.hasMany(models.IntegranteHasCargo, {
             foreignKey: "instituto_id"
         })
+        Instituto.hasMany(models.Gestion, {
+            as: "institutoGestion",
+            foreignKey: "instituto_id"
+        })
+        Instituto.hasMany(models.ProyectoTesis, {
+            as: "institutoProyectoTesis",
+            foreignKey: "instituto_id"
+        })
+
     };
 
     //     Developer.hasMany(models.Education, {

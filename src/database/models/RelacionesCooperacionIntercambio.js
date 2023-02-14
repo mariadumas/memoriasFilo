@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tablename: "relaciones_cooperacion_intercambio",
+        tableName: "relaciones_cooperacion_intercambio",
         timestamps: false
     }
 

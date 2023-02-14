@@ -16,11 +16,18 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tablename: "funcion",
+        tableName: "funcion",
         timestamps: false
     }
 
     const Funcion = sequelize.define(alias, cols, config)
+
+    Funcion.associate = (models) => {
+        Funcion.hasMany(models.Integrante, {
+            as: "funcionIntegrante",
+            foreignKey: "funcion_id"
+        })
+    }
 
 
     return Funcion

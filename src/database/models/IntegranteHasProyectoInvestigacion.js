@@ -26,12 +26,21 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tablename: "integrante_has_proyecto_investigacion",
+        tableName: "integrante_has_proyecto_investigacion",
         timestamps: false
     }
 
 
     const IntegranteHasProyectoInvestigacion = sequelize.define(alias, cols, config)
+
+    IntegranteHasProyectoInvestigacion.associate = (models) => {
+        IntegranteHasProyectoInvestigacion.belongsTo(models.Integrante, {
+            foreignKey: "integrante_id"
+        })
+        IntegranteHasProyectoInvestigacion.belongsTo(models.ProyectoInvestigacion, {
+            foreignKey: "proyecto_investigacion_id"
+        })
+    }
 
 
     return IntegranteHasProyectoInvestigacion;

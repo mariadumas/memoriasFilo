@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tablename: "revista_has_base_index",
+        tableName: "revista_has_base_index",
         timestamps: false
     }
 

@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tablename: "actividad_extension",
+        tableName: "actividad_extension",
         timestamps: false
     }
 

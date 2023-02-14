@@ -19,12 +19,28 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tablename: "institucion",
+        tableName: "institucion",
         timestamps: false
     }
 
     const Institucion = sequelize.define(alias, cols, config)
 
+    Institucion.associate = (models) => {
+        Institucion.hasMany(models.IntegranteHasCargo, {
+            // as: "institucionIntegranteHasCargo",
+            foreignKey: "institucion_id"
+        })
+        Institucion.hasMany(models.Beca, {
+            as: "institucionBeca",
+            foreignKey: "institucion_id"
+        })
+        Institucion.hasMany(models.ProyectoInvestigacion, {
+            as: "institucionProyectoInvestigacion",
+            foreignKey: "institucion_id"
+        })
+
+
+    }
 
     return Institucion
 

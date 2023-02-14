@@ -50,11 +50,55 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tablename: "integrante",
+        tableName: "integrante",
         timestamps: false
     }
 
     const Integrante = sequelize.define(alias, cols, config)
+
+
+    Integrante.associate = (models) => {
+        Integrante.belongsTo(models.Instituto, {
+            as: "integranteInstituto",
+            foreignKey: "instituto1"
+        })
+        Integrante.belongsTo(models.Instituto, {
+            as: "integranteInstituto2",
+            foreignKey: "instituto2"
+        })
+        Integrante.belongsToMany(models.Cargo, {
+            through: "IntegranteHasCargo",
+            foreignKey: "integrante_id",
+            otherKey: "cargo_id",
+            timestamps: false
+        })
+        Integrante.hasMany(models.IntegranteHasCargo, {
+            foreignKey: "integrante_id"
+        })
+        Integrante.belongsTo(models.Funcion, {
+            as: "integranteFuncion",
+            foreignKey: "funcion_id"
+        })
+        Integrante.hasMany(models.Gestion, {
+            as: "integranteGestion",
+            foreignKey: "integrante_id"
+        })
+        Integrante.hasMany(models.ProyectoTesis, {
+            as: "integranteProyectoTesis",
+            foreignKey: "investigador"
+        })
+        Integrante.belongsToMany(models.ProyectoInvestigacion, {
+            through: "IntegranteHasProyectoInvestigacion",
+            foreignKey: "integrante_id",
+            otherKey: "proyecto_investigacion_id",
+            timestamps: false
+        })
+        Integrante.hasMany(models.IntegranteHasProyectoInvestigacion, {
+            foreignKey: "integrante_id"
+        })
+
+  
+    }
 
 
     return Integrante

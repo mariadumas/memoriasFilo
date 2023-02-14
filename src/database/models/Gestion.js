@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
 
-    let alias = "RolGestion"
+    let alias = "Gestion"
 
     let cols = {
         id: {
@@ -26,19 +26,33 @@ module.exports = (sequelize, DataTypes) => {
         vigente: {
             type: DataTypes.BOOLEAN
         },
+        instituto_id: {
+            type: DataTypes.INTEGER.UNSIGNED
+        }
    
 
     };
 
     let config = {
-        tablename: "rol_gestion",
+        tableName: "gestion",
         timestamps: false
     }
     
     
-   const RolGestion = sequelize.define(alias, cols, config)
+   const Gestion = sequelize.define(alias, cols, config)
+
+   Gestion.associate = (models) => {
+    Gestion.belongsTo(models.Integrante, {
+        as: "gestionIntegrante",
+        foreignKey: "integrante_id"
+    })
+    Gestion.belongsTo(models.Instituto, {
+        as: "gestionInstituto",
+        foreignKey: "instituto_id"
+    })
+   }
 
 
-    return RolGestion;
+    return Gestion;
 
 }

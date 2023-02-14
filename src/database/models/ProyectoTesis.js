@@ -59,12 +59,26 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tablename: "proyecto_tesis",
+        tableName: "proyecto_tesis",
         timestamps: false
     }
 
     const ProyectoTesis = sequelize.define(alias, cols, config)
 
+    ProyectoTesis.associate = (models) => {
+        ProyectoTesis.belongsTo(models.Integrante, {
+            as: "proyectoTesisIntegrante",
+            foreignKey: "investigador"
+        })
+        ProyectoTesis.belongsTo(models.Instituto, {
+            as: "proyectoTesisInstituto",
+            foreignKey: "instituto_id"
+        })
+        ProyectoTesis.belongsTo(models.Beca, {
+            as: "proyectoTesisBeca",
+            foreignKey: "beca_id"
+        })
+    }
 
     return ProyectoTesis
 

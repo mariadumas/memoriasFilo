@@ -11,19 +11,28 @@ module.exports = (sequelize, DataTypes) => {
         },
         nombre: {
             type: DataTypes.STRING(100)
-        }, 
-        institucion_id: {
-            type: DataTypes.INTEGER.UNSIGNED
         }
 
     };
 
     let config = {
-        tablename: "cargo",
+        tableName: "cargo",
         timestamps: false
     }
 
     const Cargo = sequelize.define(alias, cols, config)
+
+    Cargo.associate = (models) => {
+        Cargo.belongsToMany(models.Integrante, {
+            through: "IntegranteHasCargo",
+            foreignKey: "cargo_id",
+            otherKey: "integrante_id",
+            timestamps: false
+        })
+        Cargo.hasMany(models.IntegranteHasCargo, {
+            foreignKey: "cargo_id"
+        })
+    }
 
 
     return Cargo

@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tablename: "integrante_has_organo_representativo",
+        tableName: "integrante_has_organo_representativo",
         timestamps: false
     }
 

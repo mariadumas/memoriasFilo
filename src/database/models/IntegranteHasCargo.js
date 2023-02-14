@@ -31,17 +31,36 @@ module.exports = (sequelize, DataTypes) => {
         instituto_id: {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
+        },
+        institucion_id: {
+            type: DataTypes.INTEGER.UNSIGNED
         }
 
     };
 
     let config = {
-        tablename: "integrante_has_cargo",
+        tableName: "integrante_has_cargo",
         timestamps: false
     }
     
     
    const IntegranteHasCargo = sequelize.define(alias, cols, config)
+
+   IntegranteHasCargo.associate = (models) => {
+    IntegranteHasCargo.belongsTo(models.Instituto, {
+        foreignKey: "instituto_id"
+    })
+    IntegranteHasCargo.belongsTo(models.Integrante, {
+        foreignKey: "integrante_id"
+    })
+    IntegranteHasCargo.belongsTo(models.Cargo, {
+        foreignKey: "cargo_id"
+    })
+    IntegranteHasCargo.belongsTo(models.Institucion, {
+        foreignKey: "institucion_id"
+    })
+
+   }
 
 
     return IntegranteHasCargo;

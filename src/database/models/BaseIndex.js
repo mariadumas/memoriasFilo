@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tablename: "base_index",
+        tableName: "base_index",
         timestamps: false
     }
     

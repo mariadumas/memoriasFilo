@@ -59,6 +59,19 @@ module.exports = (sequelize, DataTypes) => {
             as: "proyectoInvestigacionInstituto",
             foreignKey: "instituto_id"
         })
+        ProyectoInvestigacion.belongsTo(models.Institucion, {
+            as: "proyectoInvestigacionInstitucion",
+            foreignKey: "institucion_id"
+        })
+        ProyectoInvestigacion.belongsToMany(models.Integrante, {
+            through: "IntegranteHasProyectoInvestigacion",
+            foreignKey: "proyecto_investigacion_id",
+            otherKey: "integrante_id",
+            timestamps: false
+        })
+        ProyectoInvestigacion.hasMany(models.IntegranteHasProyectoInvestigacion, {
+            foreignKey: "proyecto_investigacion_id"
+        })
     }
 
 
