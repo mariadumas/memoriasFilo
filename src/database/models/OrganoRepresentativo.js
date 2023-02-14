@@ -36,6 +36,22 @@ module.exports = (sequelize, DataTypes) => {
 
     const OrganoRepresentativo = sequelize.define(alias, cols, config)
 
+    OrganoRepresentativo.associate = (models) => {
+        OrganoRepresentativo.belongsTo(models.Instituto, {
+            as: "organoRepresentativoInstituto",
+            foreignKey: "instituto_id"
+        })
+        OrganoRepresentativo.belongsToMany(models.Integrante, {
+            through: "IntegranteHasOrganoRepresentativo",
+            foreignKey: "organo_representativo_id",
+            otherKey: "integrante_id",
+            timestamps: false
+        })
+        OrganoRepresentativo.hasMany(models.IntegranteHasOrganoRepresentativo, {
+            foreignKey: "organo_representativo_id"
+        })
+    }
+
 
     return OrganoRepresentativo
 

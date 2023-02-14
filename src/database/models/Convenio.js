@@ -46,6 +46,12 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     const Convenio = sequelize.define(alias, cols, config)
+    Convenio.associate = (models) => {
+        Convenio.belongsTo(models.Instituto, {
+            as: "convenioInstituto",
+            foreignKey: "instituto_id"
+        })
+    }
 
 
     return Convenio

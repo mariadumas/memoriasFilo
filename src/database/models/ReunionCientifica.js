@@ -56,6 +56,29 @@ module.exports = (sequelize, DataTypes) => {
 
     const ReunionCientifica = sequelize.define(alias, cols, config)
 
+    ReunionCientifica.associate = (models) => {
+        ReunionCientifica.belongsTo(models.Instituto, {
+            as: "reunionCientificaInstituto",
+            foreignKey: "instituto_id"
+        })
+        ReunionCientifica.belongsTo(models.Integrante, {
+            as: "reunionCientificaIntegrante1",
+            foreignKey: "organizador1",
+        })
+        ReunionCientifica.belongsTo(models.Integrante, {
+            as: "reunionCientificaIntegrante2",
+            foreignKey: "organizador2"
+        })
+        ReunionCientifica.belongsTo(models.Integrante, {
+            as: "reunionCientificaIntegrante3",
+            foreignKey: "organizador3"
+        })
+        ReunionCientifica.belongsTo(models.Integrante, {
+            as: "reunionCientificaIntegrante4",
+            foreignKey: "organizador4"
+        })
+    }
+
 
     return ReunionCientifica
 

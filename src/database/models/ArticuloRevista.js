@@ -49,6 +49,16 @@ module.exports = (sequelize, DataTypes) => {
 
     const ArticuloRevista = sequelize.define(alias, cols, config)
 
+    ArticuloRevista.associate = (models) => {
+        ArticuloRevista.belongsTo(models.Integrante, {
+            as: "articuloRevistaIntegrante1",
+            foreignKey: "autor1"
+        })
+        ArticuloRevista.belongsTo(models.Integrante, {
+            as: "articuloRevistaIntegrante2",
+            foreignKey: "autor2"
+        })
+    }
 
     return ArticuloRevista
 

@@ -10,10 +10,7 @@ const indexController = {
         let institutos = await db.Instituto.findAll(
             {include: [
                 {
-                    association: "institutoIntegrante"
-                }, 
-                {
-                    association: "institutoProyectoTesis"
+                    association: "institutoReunionCientifica"
                 }
             ]}
         )
@@ -48,9 +45,13 @@ const indexController = {
 
         let integrantes = await db.Integrante.findAll({
             include: [{
-                association: "integranteFuncion"
+                association: "integranteActividadExtension1"
             }, {
-                association: "integranteProyectoTesis"
+                association: "integranteActividadExtension2"
+            },{
+                association: "integranteActividadExtension3"
+            }, {
+                association: "integranteActividadExtension4"
             }]
         })
 
@@ -77,9 +78,17 @@ const indexController = {
         }]
         })
 
+        let integranteOrgano = await db.IntegranteHasOrganoRepresentativo.findAll({
+            include: [{
+                association: "Integrante"
+            }, {
+                association: "OrganoRepresentativo"
+            }]
+        })
 
 
-        res.json(integranteProyecto)
+
+        res.json(integrantes)
 
 
         // res.render("institutos", {title: "Institutos"})

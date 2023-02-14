@@ -90,52 +90,44 @@ module.exports = (sequelize, DataTypes) => {
             as: "institutoProyectoTesis",
             foreignKey: "instituto_id"
         })
+        Instituto.hasMany(models.Premio, {
+            as: "institutoPremio",
+            foreignKey: "instituto_id"
+        })
+        Instituto.hasMany(models.OrganoRepresentativo, {
+            as: "institutoOrganoRepresentativo",
+            foreignKey: "instituto_id"
+        })
+        Instituto.hasMany(models.Convenio, {
+            as: "institutoConvenio",
+            foreignKey: "instituto_id"
+        })
+        Instituto.hasMany(models.CooperacionIntercambio, {
+            as: "institutoCooperacionIntercambio",
+            foreignKey: "instituto_id"
+        })
+        Instituto.hasMany(models.ActividadExtension, {
+            as: "institutoActividadExtension",
+            foreignKey: "instituto_id"
+        })
+        Instituto.hasMany(models.Libro, {
+            as: "institutoLibro",
+            foreignKey: "instituto_id"
+        })
+        Instituto.hasMany(models.Revista, {
+            as: "institutoRevista",
+            foreignKey: "instituto_id"
+        })
+        Instituto.hasMany(models.ReunionCientifica, {
+            as: "institutoReunionCientifica",
+            foreignKey: "instituto_id"
+        })
+
 
     };
 
-    //     Developer.hasMany(models.Education, {
-    //         as: "educations",
-    //         foreignKey: "developerId"
-    //     });
-
-    //     Developer.belongsToMany(models.Reviewer, {
-    //         through:"RecruiterSelection",
-    //         foreignKey: "developerId",
-    //         otherKey:"reviewerId",
-    //         timestamps:false
-    //     });
-
-    //     Developer.hasMany(models.UserLanguage, {
-    //         foreignKey: "developerId"
-    //     });
-
-    //     Developer.hasMany(models.RecruiterSelection, {
-    //         foreignKey: "developerId"
-    //     });
-        
-    //     Developer.belongsToMany(models.Reviewer, {
-    //         through: "ProfileOwnership",
-    //         // la clave que hace referencia al id del developer en la tabla pivot
-    //         foreignKey: "developerId",
-    //         // la clave que hace referencia a la tabla con la que nos conectamos
-    //         otherKey: "reviewerId",
-    //         timestamps: false
-    //     });
-    //     Developer.hasMany(models.ProfileOwnership, {
-    //         foreignKey: "developerId"
-    //     });
-    //     Developer.belongsToMany(models.Reviewer, {
-    //         through: "skills_report_developer_reviewer",
-    //         foreignKey: "developerId",
-    //         otherKey: "reviewerId",
-    //         timestamps: false
-    //     });
-    //     Developer.hasMany(models.SkillsReportDeveloperReviewer, {
-    //         foreignKey: "developerId"
-    //     });
 
 
-    // }
 
 
     return Instituto;

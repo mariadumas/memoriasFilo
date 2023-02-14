@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
 
-    let alias = "RelacionesCooperacionIntercambio"
+    let alias = "CooperacionIntercambio"
 
     let cols = {
         id: {
@@ -36,10 +36,21 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     }
 
-    const RelacionesCooperacionIntercambio = sequelize.define(alias, cols, config)
+    const CooperacionIntercambio = sequelize.define(alias, cols, config)
+
+    CooperacionIntercambio.associate = (models) => {
+        CooperacionIntercambio.belongsTo(models.Instituto, {
+            as: "CooperacionIntercambioInstituto",
+            foreignKey: "instituto_id"
+        })
+        CooperacionIntercambio.belongsTo(models.Integrante, {
+            as: "CooperacionIntercambioIntegrante",
+            foreignKey: "participante"
+        })
+    }
 
 
-    return RelacionesCooperacionIntercambio
+    return CooperacionIntercambio
 
 }
 

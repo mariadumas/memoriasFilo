@@ -37,6 +37,17 @@ module.exports = (sequelize, DataTypes) => {
     
    const Premio = sequelize.define(alias, cols, config)
 
+   Premio.associate = (models) => {
+    Premio.belongsTo(models.Instituto, {
+        as: "premioInstituto",
+        foreignKey: "instituto_id"
+    })
+    Premio.belongsTo(models.Integrante, {
+        as: "premioIntegrante",
+        foreignKey: "premiado"
+    })
+   }
+
 
     return Premio;
 

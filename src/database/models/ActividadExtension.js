@@ -55,6 +55,29 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     const ActividadExtension = sequelize.define(alias, cols, config)
+    
+    ActividadExtension.associate = (models) => {
+        ActividadExtension.belongsTo(models.Instituto, {
+            as: "actividadExtensionInstituto",
+            foreignKey: "instituto_id"
+        })
+        ActividadExtension.belongsTo(models.Integrante, {
+            as: "actividadExtensionIntegrante1",
+            foreignKey: "organizador1",
+        })
+        ActividadExtension.belongsTo(models.Integrante, {
+            as: "actividadExtensionIntegrante2",
+            foreignKey: "organizador2"
+        })
+        ActividadExtension.belongsTo(models.Integrante, {
+            as: "actividadExtensionIntegrante3",
+            foreignKey: "organizador3"
+        })
+        ActividadExtension.belongsTo(models.Integrante, {
+            as: "actividadExtensionIntegrante4",
+            foreignKey: "organizador4"
+        })
+    }
 
 
     return ActividadExtension

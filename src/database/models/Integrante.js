@@ -96,7 +96,95 @@ module.exports = (sequelize, DataTypes) => {
         Integrante.hasMany(models.IntegranteHasProyectoInvestigacion, {
             foreignKey: "integrante_id"
         })
-
+        Integrante.hasMany(models.Premio, {
+            as: "integrantePremio",
+            foreignKey: "premiado"
+        })
+        Integrante.belongsToMany(models.OrganoRepresentativo, {
+            through: "IntegranteHasOrganoRepresentativo",
+            foreignKey: "integrante_id",
+            otherKey: "organo_representativo_id",
+            timestamps: false
+        })
+        Integrante.hasMany(models.IntegranteHasOrganoRepresentativo, {
+            foreignKey: "integrante_id"
+        })
+        Integrante.hasMany(models.CooperacionIntercambio, {
+            as: "integranteCooperacionIntercambio",
+            foreignKey: "participante"
+        })
+        Integrante.hasMany(models.ArticuloRevista, {
+            as: "integranteArticuloRevista1",
+            foreignKey: "autor1"
+        })
+        Integrante.hasMany(models.ArticuloRevista, {
+            as: "integranteArticuloRevista2",
+            foreignKey: "autor2"
+        })
+        Integrante.hasMany(models.Libro, {
+            as: "integranteLibro1",
+            foreignKey: "autor1"
+        })
+        Integrante.hasMany(models.Libro, {
+            as: "integranteLibro2",
+            foreignKey: "autor2"
+        })
+        Integrante.hasMany(models.Libro, {
+            as: "integranteLibro3",
+            foreignKey: "autor3"
+        })
+        Integrante.hasMany(models.Libro, {
+            as: "integranteLibro4",
+            foreignKey: "autor4"
+        })
+        Integrante.hasMany(models.Revista, {
+            as: "integranteRevista1",
+            foreignKey: "editor1"
+        })
+        Integrante.hasMany(models.Revista, {
+            as: "integranteRevista2",
+            foreignKey: "editor2"
+        })
+        Integrante.hasMany(models.Revista, {
+            as: "integranteRevista3",
+            foreignKey: "editor3"
+        })
+        Integrante.hasMany(models.Revista, {
+            as: "integranteRevista4",
+            foreignKey: "editor4"
+        })
+        Integrante.hasMany(models.ReunionCientifica, {
+            as: "integranteReunionCientifica1",
+            foreignKey: "organizador1"
+        })
+        Integrante.hasMany(models.ReunionCientifica, {
+            as: "integranteReunionCientifica2",
+            foreignKey: "organizador2"
+        })
+        Integrante.hasMany(models.ReunionCientifica, {
+            as: "integranteReunionCientifica3",
+            foreignKey: "organizador3"
+        })
+        Integrante.hasMany(models.ReunionCientifica, {
+            as: "integranteReunionCientifica4",
+            foreignKey: "organizador4"
+        })
+        Integrante.hasMany(models.ActividadExtension, {
+            as: "integranteActividadExtension1",
+            foreignKey: "organizador1"
+        })
+        Integrante.hasMany(models.ActividadExtension, {
+            as: "integranteActividadExtension2",
+            foreignKey: "organizador2"
+        })
+        Integrante.hasMany(models.ActividadExtension, {
+            as: "integranteActividadExtension3",
+            foreignKey: "organizador3"
+        })
+        Integrante.hasMany(models.ActividadExtension, {
+            as: "integranteActividadExtension4",
+            foreignKey: "organizador4"
+        })
   
     }
 
