@@ -31,6 +31,15 @@ module.exports = (sequelize, DataTypes) => {
     
    const InstitutoHasLineaInvestigacion = sequelize.define(alias, cols, config)
 
+   InstitutoHasLineaInvestigacion.associate = (models) => {
+    InstitutoHasLineaInvestigacion.belongsTo(models.Instituto, {
+        foreignKey: "instituto_id"
+    })
+    InstitutoHasLineaInvestigacion.belongsTo(models.LineaInvestigacion, {
+        foreignKey: "linea_investigacion_id"
+    })
+   }
+
 
     return InstitutoHasLineaInvestigacion;
 

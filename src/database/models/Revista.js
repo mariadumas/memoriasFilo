@@ -93,6 +93,15 @@ module.exports = (sequelize, DataTypes) => {
             as: "revistaIntegrante4",
             foreignKey: "editor4"
         })
+        Revista.belongsToMany(models.BaseIndex, {
+            through: "RevistaHasBaseIndex",
+            foreignKey: "revista_id",
+            otherKey: "base_index_id",
+            timestamps: false
+        })
+        Revista.hasMany(models.RevistaHasBaseIndex, {
+            foreignKey: "revista_id"
+        })
     }
 
 

@@ -86,9 +86,41 @@ const indexController = {
             }]
         })
 
+        let lineasInvestigacion = await db.InstitutoHasLineaInvestigacion.findAll({
+            include: [{
+                association: "Instituto"
+            },{
+                association: "LineaInvestigacion"
+            }]
+        })
+
+        let palabrasClave = await db.ProyectoInvestigacionHasPalabraClave.findAll({
+            include: [{
+                association: "ProyectoInvestigacion"
+            }, {
+                association: "PalabraClave"
+            }]
+        })
+
+        let especialidades = await db.ProyectoInvestigacionHasEspecialidad.findAll({
+            include: [{
+                association: "ProyectoInvestigacion"
+            }, {
+                association: "Especialidad"
+            }]
+        })
+
+        // let bases = await db.RevistaHasBaseIndex.findAll({
+        //     include: [{
+        //         association: "Revista"
+        //     }, {
+        //         association: "BaseIndex"
+        //     }]
+        // })
 
 
-        res.json(integrantes)
+
+        res.json(especialidades)
 
 
         // res.render("institutos", {title: "Institutos"})

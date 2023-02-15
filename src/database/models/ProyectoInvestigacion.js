@@ -72,6 +72,25 @@ module.exports = (sequelize, DataTypes) => {
         ProyectoInvestigacion.hasMany(models.IntegranteHasProyectoInvestigacion, {
             foreignKey: "proyecto_investigacion_id"
         })
+        ProyectoInvestigacion.belongsToMany(models.PalabraClave, {
+            through: "ProyectoInvestigacionHasPalabraClave",
+            foreignKey: "proyecto_investigacion_id",
+            otherKey: "palabra_clave_id",
+            timestamps: false
+        })
+        ProyectoInvestigacion.hasMany(models.ProyectoInvestigacionHasPalabraClave, {
+            foreignKey: "proyecto_investigacion_id"
+        })
+        ProyectoInvestigacion.belongsToMany(models.Especialidad, {
+            through: "ProyectoInvestigacionHasEspecialidad",
+            foreignKey: "proyecto_investigacion_id",
+            otherKey: "especialidad_id",
+            timestamps: false
+        })
+        ProyectoInvestigacion.hasMany(models.ProyectoInvestigacionHasEspecialidad, {
+            foreignKey: "proyecto_investigacion_id"
+        })
+
     }
 
 

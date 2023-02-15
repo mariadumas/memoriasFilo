@@ -122,6 +122,16 @@ module.exports = (sequelize, DataTypes) => {
             as: "institutoReunionCientifica",
             foreignKey: "instituto_id"
         })
+        Instituto.belongsToMany(models.LineaInvestigacion, {
+            through: "InstitutoHasLineaInvestigacion",
+            foreignKey: "instituto_id",
+            otherKey: "linea_investigacion_id",
+            timestamps: false
+        })
+        Instituto.hasMany(models.InstitutoHasLineaInvestigacion, {
+            as: "institutoInstitutoHasLineaInvestigacion",
+            foreignKey: "instituto_id"
+        })
 
 
     };

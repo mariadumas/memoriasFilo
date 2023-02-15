@@ -32,6 +32,18 @@ module.exports = (sequelize, DataTypes) => {
     
    const BaseIndex = sequelize.define(alias, cols, config)
 
+   BaseIndex.associate = (models) => {
+    BaseIndex.belongsToMany(models.Revista, {
+        through: "RevistaHasBaseIndex",
+        foreignKey: "base_index_id",
+        otherKey: "revista_id",
+        timestamps: false
+    })
+    BaseIndex.hasMany(models.RevistaHasBaseIndex, {
+        foreignKey: "base_index_id"
+    })
+   }
+
 
     return BaseIndex;
 

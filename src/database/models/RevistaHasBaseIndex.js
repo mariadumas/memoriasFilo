@@ -29,6 +29,16 @@ module.exports = (sequelize, DataTypes) => {
 
     const RevistaHasBaseIndex = sequelize.define(alias, cols, config)
 
+    RevistaHasBaseIndex.associate = (models) => {
+        RevistaHasBaseIndex.belongsTo(models.Revista, {
+            as: "Revista",
+            foreignKey: "revista_id"
+        })
+        RevistaHasBaseIndex.belongsTo(models.BaseIndex, {
+            foreignKey: "base_index_id"
+        })
+    }
+
 
     return RevistaHasBaseIndex;
 

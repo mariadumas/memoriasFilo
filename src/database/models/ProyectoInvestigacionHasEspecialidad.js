@@ -29,6 +29,15 @@ module.exports = (sequelize, DataTypes) => {
 
     const ProyectoInvestigacionHasEspecialidad = sequelize.define(alias, cols, config)
 
+    ProyectoInvestigacionHasEspecialidad.associate = (models) => {
+        ProyectoInvestigacionHasEspecialidad.belongsTo(models.ProyectoInvestigacion, {
+            foreignKey: "proyecto_investigacion_id"
+        })
+        ProyectoInvestigacionHasEspecialidad.belongsTo(models.Especialidad, {
+            foreignKey: "especialidad_id"
+        })
+    }
+
 
     return ProyectoInvestigacionHasEspecialidad;
 

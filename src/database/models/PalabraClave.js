@@ -25,6 +25,18 @@ module.exports = (sequelize, DataTypes) => {
     
    const PalabraClave = sequelize.define(alias, cols, config)
 
+   PalabraClave.associate = (models) => {
+    PalabraClave.belongsToMany(models.ProyectoInvestigacion, {
+        through: "ProyectoInvestigacionHasPalabraClave",
+        foreignKey: "palabra_clave_id",
+        otherKey: "proyecto_investigacion_id",
+        timestamps: false
+    })
+    PalabraClave.hasMany(models.ProyectoInvestigacionHasPalabraClave, {
+        foreignKey: "palabra_clave_id"
+    })
+   }
+
 
     return PalabraClave;
 
