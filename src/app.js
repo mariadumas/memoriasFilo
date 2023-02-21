@@ -2,7 +2,7 @@ const express = require('express');
 //Hago el require del router. Como lo nombré index.js no hace falta especificar el archivo. 
 const mainRouter = require("./routes")
 const app = express();
-const port = 3000;
+const port = 3030;
 const path = require('path');
 
 app.use(express.static("./public"));

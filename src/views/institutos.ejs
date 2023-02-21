@@ -8,39 +8,71 @@
 
                 <h2 class="insti-title">> FILO:UBA</h2>
                 <article class="insti-container">
-                    <div class="card">
-                        <div class="insti-img-wrapper">
-                            <img src="/images/esquina-instis.jpeg" alt="Instituto" style="width:100%">
+                    <% institutos.forEach(instituto=> { %>
+                        <% if (instituto.pertenencia === "FILO:UBA") { %>
+
+                        <div class="card">
+                            <div class="insti-img-wrapper">
+                                <a href="/institutos/<%= instituto.id %>"><img src="/images/<%= instituto.logo %>" alt="Instituto"></a>
+                            </div>
+                            <div class="card-container">
+                                <h4>
+                                    <%= instituto.nombre %>
+                                </h4>
+                                <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8">
+                                    <p class="address"><i class="fa-solid fa-location-dot"></i>
+                                        <%= instituto.direccion %>
+                                    </p>
+                                </a>
+                                <!-- <p><b>Teléfono:</b> <%= instituto.telefono %></p>
+                                <p><b>Email:</b> <%= instituto.email %></p> -->
+                                <% if (instituto.institutoGestion.length> 0) { %>
+                                    <% instituto.institutoGestion.forEach(gestion=> { %>
+                                        <p><b>
+                                                <%= gestion.rol %>:
+                                            </b>
+                                            <% integrantes.forEach(integrante=> { %>
+                                                <% if (integrante.id===gestion.integrante_id) { %>
+
+                                                    <%= integrante.nombre %>
+                                                        <%= integrante.apellido %>
+                                        </p>
+
+
+                                        <% } %>
+
+                                            <% }) %>
+
+
+
+
+                                                <% }) %>
+
+                                                    <% } %>
+
+
+
+                            </div>
+                            <div class="redes-card">
+                                <a href="<%= instituto.pagina_web %>"><i class="fa-solid fa-globe"></i></a>
+                                <% if (instituto.facebook !== null) { %>                                 
+                                    <a href="<%= instituto.facebook %>"><i class="fa-brands fa-facebook-f"></i></a>
+                                <% } %>
+                                <% if (instituto.instagram) { %>
+                                    <a href="<%= instituto.instagram %>"><i class="fa-brands fa-instagram"></i></a>
+                                <% } %>
+                            
+                                <% if (instituto.twitter) { %>
+                                    <a href="<%= instituto.twitter %>"><i class="fa-brands fa-twitter"></i></a>
+                                    <% } %>
+                                    <% if (instituto.youtube) { %>
+                                     
+                                        <a href="<%= instituto.youtube %>"><i class="fa-brands fa-youtube"></i></a>
+                                    <% } %>
+                            </div>
                         </div>
-                        <div class="card-container">
-                            <h4>Instituto de Literatura Argentina "Ricardo Rojas"</h4>
-                            <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8"><p class="address"><i class="fa-solid fa-location-dot"></i>25 de mayo 217, 1er piso, CABA.</p></a>
-                            <p><b>Directora:</b> Alejandra Laera</p>
-                            <p><b>Secretaria académica:</b> Karina Boiola</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="insti-img-wrapper">
-                            <img src="/images/esquina-instis.jpeg" alt="Instituto" style="width:100%">
-                        </div>
-                        <div class="card-container">
-                            <h4>Instituto de Literatura Argentina "Ricardo Rojas"</h4>
-                            <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8"><p class="address"><i class="fa-solid fa-location-dot"></i>25 de mayo 217, 1er piso, CABA.</p></a>
-                            <p><b>Directora:</b> Alejandra Laera</p>
-                            <p><b>Secretaria académica:</b> Karina Boiola</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="insti-img-wrapper">
-                            <img src="/images/esquina-instis.jpeg" alt="Instituto" style="width:100%">
-                        </div>
-                        <div class="card-container">
-                            <h4>Instituto de Literatura Argentina "Ricardo Rojas"</h4>
-                            <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8"><p class="address"><i class="fa-solid fa-location-dot"></i>25 de mayo 217, 1er piso, CABA.</p></a>
-                            <p><b>Directora:</b> Alejandra Laera</p>
-                            <p><b>Secretaria académica:</b> Karina Boiola</p>
-                        </div>
-                    </div>
+                        <% } %>
+                        <% }) %>
                 </article>
                 <h2 class="insti-title">> UBA</h2>
                 <article class="insti-container">
@@ -50,7 +82,10 @@
                         </div>
                         <div class="card-container">
                             <h4>Instituto de Literatura Argentina "Ricardo Rojas"</h4>
-                            <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8"><p class="address"><i class="fa-solid fa-location-dot"></i>25 de mayo 217, 1er piso, CABA.</p></a>
+                            <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8">
+                                <p class="address"><i class="fa-solid fa-location-dot"></i>25 de mayo 217, 1er piso,
+                                    CABA.</p>
+                            </a>
                             <p><b>Directora:</b> Alejandra Laera</p>
                             <p><b>Secretaria académica:</b> Karina Boiola</p>
                         </div>
@@ -61,7 +96,10 @@
                         </div>
                         <div class="card-container">
                             <h4>Instituto de Literatura Argentina "Ricardo Rojas"</h4>
-                            <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8"><p class="address"><i class="fa-solid fa-location-dot"></i>25 de mayo 217, 1er piso, CABA.</p></a>
+                            <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8">
+                                <p class="address"><i class="fa-solid fa-location-dot"></i>25 de mayo 217, 1er piso,
+                                    CABA.</p>
+                            </a>
                             <p><b>Directora:</b> Alejandra Laera</p>
                             <p><b>Secretaria académica:</b> Karina Boiola</p>
                         </div>
@@ -72,7 +110,10 @@
                         </div>
                         <div class="card-container">
                             <h4>Instituto de Literatura Argentina "Ricardo Rojas"</h4>
-                            <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8"><p class="address"><i class="fa-solid fa-location-dot"></i>25 de mayo 217, 1er piso, CABA.</p></a>
+                            <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8">
+                                <p class="address"><i class="fa-solid fa-location-dot"></i>25 de mayo 217, 1er piso,
+                                    CABA.</p>
+                            </a>
                             <p><b>Directora:</b> Alejandra Laera</p>
                             <p><b>Secretaria académica:</b> Karina Boiola</p>
                         </div>
@@ -87,7 +128,10 @@
                         </div>
                         <div class="card-container">
                             <h4>Instituto de Literatura Argentina "Ricardo Rojas"</h4>
-                            <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8"><p class="address"><i class="fa-solid fa-location-dot"></i>25 de mayo 217, 1er piso, CABA.</p></a>
+                            <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8">
+                                <p class="address"><i class="fa-solid fa-location-dot"></i>25 de mayo 217, 1er piso,
+                                    CABA.</p>
+                            </a>
                             <p><b>Directora:</b> Alejandra Laera</p>
                             <p><b>Secretaria académica:</b> Karina Boiola</p>
                         </div>
@@ -98,7 +142,10 @@
                         </div>
                         <div class="card-container">
                             <h4>Instituto de Literatura Argentina "Ricardo Rojas"</h4>
-                            <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8"><p class="address"><i class="fa-solid fa-location-dot"></i>25 de mayo 217, 1er piso, CABA.</p></a>
+                            <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8">
+                                <p class="address"><i class="fa-solid fa-location-dot"></i>25 de mayo 217, 1er piso,
+                                    CABA.</p>
+                            </a>
                             <p><b>Directora:</b> Alejandra Laera</p>
                             <p><b>Secretaria académica:</b> Karina Boiola</p>
                         </div>

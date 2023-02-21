@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <%- include("./partials/header.ejs") %>
+
+
+    <main>
+        <section class="form-container">
+            <h2 class="form-title">Agregar un nuevo instituto</h2>
+            <form action="/ci" method="POST" enctype="multipart/form-data">
+                
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre">
+                
+                <label for="pertenencia">Pertenencia</label>
+                <select name="pertenencia" id="pertenencia">
+                    <option value=""selected>Seleccionar pertenencia</option>
+                        <option value="FILO:UBA">FILO:UBA</option>
+                        <option value="UBA">UBA</option>
+                        <option value="UBA-CONICET">UBA-CONICET</option>
+                    </select>
+                    
+                    <label for="horarioAtencion">Horario de atención</label>
+                    <input type="text" name="horarioAtencion" id="horarioAtencion">
+                    
+                    <label for="horarioBiblioteca">Horario de la biblioteca</label>
+                    <input type="text" name="horarioBiblioteca" id="horarioBiblioteca">
+                    
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" name="email" id="email">
+
+                    <label for="sede">Sede</label>
+                    <select name="sede" id="sede">
+                        <option value=""selected>Seleccionar sede</option>
+                            <option value="25 de mayo">25 de mayo</option>
+                            <option value="Puan">Puan</option>
+                            <option value="Bonifacio">Bonifacio</option>
+                            <option value="Tilcara">Tilcara</option>
+                            <option value="Museo Etnográfico">Museo Etnográfico</option>
+                        </select>
+
+                    <label for="direccion">Dirección</label>
+                    <input type="text" name="direccion" id="direccion">
+
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" name="telefono" id="telefono">
+                    
+                    <label for="imagen">Subir una imagen</label>
+                    <input type="file" name="imagen" id="imagen">
+        
+                    <label for="logo">Logo</label>
+                    <input type="file" name="logo" id="logo">
+
+                    <label for="web">Página web</label>
+                    <input type="text" name="web" id="web">
+
+                    <label for="facebook">Facebook</label>
+                    <input type="text" name="facebook" id="facebook">
+
+                    <label for="instagram">Instagram</label>
+                    <input type="text" name="instagram" id="instagram">
+
+                    <label for="twitter">Twitter</label>
+                    <input type="text" name="twitter" id="twitter">
+
+                    <label for="youtube">Canal de YouTube</label>
+                    <input type="text" name="youtube" id="youtube">
+        
+                                        
+                    <button type="submit" class="form-buttton">Agregar instituto</button>
+                               
+        
+            </form>
+        </section>
+
+    </main>
+
+    <%- include("./partials/footer.ejs") %>
+    
+</body>
+</html>

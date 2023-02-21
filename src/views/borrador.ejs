@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <article class="insti-container">
+        <% institutos.forEach(instituto => { %>
+            <div class="card">
+                <div class="insti-img-wrapper">
+                    <img src="/images/esquina-instis.jpeg" alt="Instituto" style="width:100%">
+                </div>
+                <div class="card-container">
+                    <h4><%= instituto.nombre %></h4>
+                    <a href="https://goo.gl/maps/J7Tks5afBvQJM7Qz8"><p class="address"><i class="fa-solid fa-location-dot"></i><%= instituto.direccion %></p></a>
+                    <% integrantes.forEach(integrante => { %>
+                        <% if (integrante.integranteGestion.length > 0) { %>
+                            <% integrante.integranteGestion.forEach(gestion => { %>   
+                                <p><b><%= gestion.rol %>: </b><%= integrante.nombre%> <%= integrante.apellido %></p>
+                            <% }) %>     
+                        <% } %>    
+                    <% }) %>
+                </div>
+            </div>    
+        <% }) %>
+    </article>
+</body>
+</html>
