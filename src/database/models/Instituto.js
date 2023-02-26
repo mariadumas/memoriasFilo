@@ -80,6 +80,7 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "instituto2"
         })
         Instituto.hasMany(models.IntegranteHasCargo, {
+            as: "institutoIntegranteHasCargo",
             foreignKey: "instituto_id"
         })
         Instituto.hasMany(models.Gestion, {

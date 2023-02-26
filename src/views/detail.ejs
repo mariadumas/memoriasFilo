@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+</head>
+
+<body>
+    <%- include("./partials/header.ejs") %>
+        <main class="main-detail">
+            
+            <h2 class="title-detail"><%= instituto.nombre %></h2>
+            
+            <article class="cajas">
+
+                <div class="caja-detail-larga">
+                    
+                
+                    <div class="caja-detail mini">
+                        <p class="copy-caja-detail">Integrantes</p> 
+                        <p class="copy-number primera"> <%= instituto.institutoIntegrante.length %></p>
+                        <button class="learn-more">
+                            <span class="circle" aria-hidden="true">
+                                <span class="icon arrow"></span>
+                            </span>
+                            <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                        </button>
+                    </div>   
+                    <div class="caja-detail mini">
+                        <p class="copy-caja-detail">Proyectos de investigación</p>
+                        <p class="copy-number"> <%= instituto.institutoProyectoInvestigacion.length %></p>
+                        <button class="learn-more">
+                            <span class="circle" aria-hidden="true">
+                                <span class="icon arrow"></span>
+                            </span>
+                            <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                        </button>  
+                    </div>       
+                    <div class="caja-detail mini">
+                        <p class="copy-caja-detail">Becarixs</p>
+                        <p class="copy-number"> <%= instituto.institutoProyectoTesis.length %></p>
+                        <button class="learn-more">
+                            <span class="circle" aria-hidden="true">
+                                <span class="icon arrow"></span>
+                            </span>
+                            <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                        </button>  
+                    </div>  
+
+                </div>
+
+     
+
+                <div class="caja-detail">
+                    <p class="copy-caja-detail">Libros</p>
+                    <p class="copy-number"> <%= instituto.institutoLibro.length %></p>
+                    <button class="learn-more grande">
+                        <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                        </span>
+                        <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                    </button>
+                </div>
+
+                <div class="caja-detail">
+                    <p class="copy-caja-detail">Revistas</p>
+                    <p class="copy-number"> <%= instituto.institutoRevista.length %></p>
+                    <button class="learn-more grande">
+                        <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                        </span>
+                        <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                    </button>
+                </div>
+
+                <div class="caja-detail">
+                    <p class="copy-caja-detail">Reuniones científicas</p>
+                    <p class="copy-number"> <%= instituto.institutoReunionCientifica.length %></p>
+                    <button class="learn-more grande">
+                        <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                        </span>
+                        <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                    </button>
+                </div>
+
+                <div class="caja-detail">
+                    <p class="copy-caja-detail">Actividades de extensión</p>
+                    <p class="copy-number"> <%= instituto.institutoActividadExtension.length %></p>
+                    <button class="learn-more grande">
+                        <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                        </span>
+                        <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                    </button>
+                </div>
+
+
+                <div class="caja-detail-larga">
+                    
+                
+                    <div class="caja-detail mini">
+                        <p class="copy-caja-detail">Relaciones interinstitucionales</p> 
+                        <p class="copy-number"> <%= instituto.institutoConvenio.length %></p>
+                        <button class="learn-more">
+                            <span class="circle" aria-hidden="true">
+                                <span class="icon arrow"></span>
+                            </span>
+                            <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                        </button>
+                      
+                    </div>   
+                    <div class="caja-detail mini">
+                        <p class="copy-caja-detail">Convenios</p>
+                        <p class="copy-number"> <%= instituto.institutoCooperacionIntercambio.length %></p>
+                        <button class="learn-more">
+                            <span class="circle" aria-hidden="true">
+                                <span class="icon arrow"></span>
+                            </span>
+                            <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                        </button>  
+                    </div>       
+                    <div class="caja-detail mini">
+                        <p class="copy-caja-detail">Premios</p>
+                        <p class="copy-number"> <%= instituto.institutoPremio.length %></p>  
+                        <button class="learn-more">
+                            <span class="circle" aria-hidden="true">
+                                <span class="icon arrow"></span>
+                            </span>
+                            <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                        </button>
+                    </div>  
+
+                </div>
+                
+            </article>
+
+
+        </main>
+
+
+
+        <%- include("./partials/footer.ejs") %>
+        <script src="/js/detail2.js"></script>
+</body>
+
+</html>

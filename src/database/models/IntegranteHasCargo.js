@@ -48,6 +48,7 @@ module.exports = (sequelize, DataTypes) => {
 
    IntegranteHasCargo.associate = (models) => {
     IntegranteHasCargo.belongsTo(models.Instituto, {
+        as: "IntegranteHasCargoInstituto",
         foreignKey: "instituto_id"
     })
     IntegranteHasCargo.belongsTo(models.Integrante, {

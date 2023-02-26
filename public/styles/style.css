@@ -24,8 +24,10 @@ nav {
     width: 100%;
 }
 
+
+
 .logo {
-    width: 13%;
+    width: 36%;
     align-self: center;
     /* border: 2px solid salmon; */
 
@@ -194,7 +196,8 @@ h2 {
 /* Institutos */
 
 .main-insti {
-    background-color: #ebf4f5;
+    background-color: #EEEEEE;
+    /* background-color: #ebf4f5; */
     border-radius: 35px;
     margin-top: 100px;
     padding-top: 50px;
@@ -229,7 +232,7 @@ h2 {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin: 30px;
     margin-bottom: 25px;
     max-height: 800px;
@@ -261,6 +264,7 @@ h2 {
 
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
 }
 
 .card-container {
@@ -281,7 +285,7 @@ h2 {
     color: #4D5157;
 }
 
-.card-container a{
+.card-container a {
     text-decoration: none;
     color: #44485f;
 }
@@ -299,23 +303,243 @@ h2 {
 }
 
 .redes-card {
+    align-self: flex-end;
     /* border: 2px solid green; */
     background-color: #454850;
+    bottom: 0%;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-around;
-    padding: 14px;
+    margin-top: auto;
+    padding: 14px; 
+    width: 100%;
 }
 
 
-.fa-instagram, .fa-facebook-f,  .fa-twitter, .fa-youtube, .fa-globe {
+.fa-instagram,
+.fa-facebook-f,
+.fa-twitter,
+.fa-youtube,
+.fa-globe {
     color: rgb(221, 218, 218);
     font-size: 18px;
 }
 
-.fa-instagram:hover, .fa-facebook-f:hover,  .fa-twitter:hover, .fa-youtube:hover, .fa-globe:hover {
+.fa-instagram:hover,
+.fa-facebook-f:hover,
+.fa-twitter:hover,
+.fa-youtube:hover,
+.fa-globe:hover {
     color: white;
 }
+
+
+/* Detail */
+
+.main-detail {
+    /* background-color: #59606d; */
+    background-color: #f3f4f4;
+    border-radius: 35px;
+    margin-bottom: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    padding: 100px;
+    width: 90%;
+
+    /* border: 2px solid blue; */
+}
+
+.title-detail{
+    color:#2e2e2e;
+    margin-bottom: 50px;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+    
+}
+
+.cajas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* border: 2px solid blue; */
+ 
+}
+
+.caja-detail-larga {
+    align-items: center;
+    /* border: 2px solid green; */
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    padding: 55px;
+    width: 100%;
+
+}
+
+
+
+
+.caja-detail {
+    /* background-color: #374150; */
+    background-color: #e3e5e5;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    color:#2e2e2e;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* justify-content: space-evenly; */
+    margin-bottom: 50px;
+    padding: 15px;
+    transition: 250ms ease-in-out;
+    width: 35%;
+}
+
+
+
+.caja-detail:hover {
+    background-color: whitesmoke;
+    transform: scale(1.15);
+}
+
+
+.mini {
+    margin-bottom: 0px;
+    width: 30%;
+}
+
+
+.tercera {
+    background-color: #374150;
+    color: whitesmoke;
+}
+
+
+.copy-number {
+    color: #5ec3a6;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    /* border: 2px solid green; */
+}
+
+.segunda {
+    color: whitesmoke;
+}
+
+.copy-caja-detail {
+    align-self: left;
+    /* background: #666f77; */
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 8px;
+}
+
+.learn-more {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+
+}
+
+.learn-more {
+    width: 100%;
+    height: auto;
+
+}
+
+.grande {
+    width: 80%
+}
+
+.learn-more .circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #666f77;
+    border-radius: 1.625rem;
+}
+
+.learn-more .circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #5ec3a6;
+}
+
+.learn-more .circle .icon.arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+}
+
+.learn-more .circle .icon.arrow::before {
+    position: absolute;
+    content: "";
+    top: -0.29rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #5ec3a6;
+    border-right: 0.125rem solid #5ec3a6;
+    transform: rotate(45deg);
+}
+
+.learn-more .button-text {
+    bottom: 0;
+    color:#2e2e2e;
+    font-size: 13px;
+    font-weight: 500;
+    left: 0;
+    line-height: 1.6;
+    margin: 0 0 0 1.85rem;
+    padding: 0.7rem 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    text-transform: uppercase;
+    top: 0;
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+}
+
+.learn-more:hover .circle {
+    width: 100%;
+}
+
+.learn-more:hover .circle .icon.arrow {
+    background: #5ec3a6;
+    transform: translate(1rem, 0);
+}
+
+.learn-more:hover .button-text {
+    color: #fff;
+}
+
+
+.caja-detail:hover .button-text{
+    color: #2e2e2e;
+}
+
+.learn-more:hover .button-text {
+    color: #fff;
+}
+
 
 
 
@@ -400,7 +624,7 @@ h2 {
     margin-right: auto;
     width: 100%;
     margin-top: auto;
-    padding: 10px;
+    /* padding: 10px; */
 
 }
 

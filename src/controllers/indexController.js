@@ -2,8 +2,28 @@ const db = require("../database/models")
 
 const indexController = {
 
-    home: (req, res) => {
-        res.render("index", { title: "Home" })
+    home: async (req, res) => {
+        try {
+
+
+            let institutos = await db.Instituto.findAll()
+
+            let proyectos = await db.ProyectoInvestigacion.findAll()
+
+            let becarios = await db.ProyectoTesis.findAll({
+                where: {
+                    con_beca: 1
+                }
+            })
+
+
+            res.render("index", { title: "Home", institutos: institutos, proyectos: proyectos, becarios: becarios })
+        }
+
+        catch (error) {
+            console.log(error);
+
+        }
     },
     create: (req, res) => {
         res.render("createInstituto", { title: "Agregar Instituto" })
@@ -38,35 +58,14 @@ const indexController = {
             })
 
     },
-    // json: async (req, res) => {
-    //     let institutos = await db.Instituto.findAll(
-    //         {include: [
-    //             {
-    //                 association: "institutoGestion"
-    //             }
-    //         ]}
-    //     )
-
-    //     let integrantes = await db.Integrante.findAll({
-    //         include: [{
-    //             association: "integranteGestion"
-    //         }]
-    //     })
-
-    //     res.json(institutos)
-
-    // },
-
-    institutos: async (req, res) => {
-
+    json: async (req, res) => {
         let institutos = await db.Instituto.findAll(
             {
                 include: [
                     {
-                        association: "institutoGestion",
-                        separate: true,
-                        order: [['id', 'asc']]
-                    }],
+                        association: "institutoIntegranteHasCargo"
+                    }
+                ]
             }
         )
 
@@ -76,8 +75,38 @@ const indexController = {
             }]
         })
 
+        res.json(institutos)
 
-        res.render("institutos", { title: "Institutos", institutos: institutos, integrantes: integrantes })
+    },
+
+    institutos: async (req, res) => {
+
+        try {
+            let institutos = await db.Instituto.findAll(
+                {
+                    include: [
+                        {
+                            association: "institutoGestion",
+                            separate: true,
+                            order: [['id', 'asc']]
+                        }],
+                }
+            )
+    
+            let integrantes = await db.Integrante.findAll({
+                include: [{
+                    association: "integranteGestion"
+                }]
+            })
+    
+    
+            res.render("institutos", { title: "Institutos", institutos: institutos, integrantes: integrantes })
+            
+        } catch (error) {
+            console.log(error);
+            
+        }
+
 
         // let proyectosInvestigacion = await db.ProyectoInvestigacion.findAll(
         //     {
@@ -189,16 +218,51 @@ const indexController = {
 
 
     },
-    detail1: async (req, res) => {
+    detail: async (req, res) => {
+        try {
 
-        let instituto = await db.Instituto.findByPk(req.params.id)
-            .catch((error) => {
-                console.log(error);
+
+
+            let instituto = await db.Instituto.findByPk(req.params.id, {
+                include: [{
+                    association: "institutoProyectoInvestigacion"
+                }, {
+                    association: "institutoIntegrante"
+                }, {
+                    association: "institutoProyectoTesis"
+                }, {
+                    association: "institutoLibro"
+                }, {
+                    association: "institutoRevista"
+                }, {
+                    association: "institutoReunionCientifica"
+                }, {
+                    association: "institutoActividadExtension"
+                }, {
+                    association: "institutoConvenio"
+                }, {
+                    association: "institutoPremio"
+                }, {
+                    association: "institutoCooperacionIntercambio"
+                }]
             })
+                .catch((error) => {
+                    console.log(error);
+                })
 
-        res.render("detail1", { instituto: instituto, title: instituto.nombre })
+
+
+
+            res.render("detail", { instituto: instituto, title: instituto.nombre })
+        }
+
+
+        catch (error) {
+            console.log(error)
+        }
     }
 
 }
+
 
 module.exports = indexController;
