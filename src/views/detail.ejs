@@ -7,6 +7,7 @@
 
 <body>
     <%- include("./partials/header.ejs") %>
+
         <main class="main-detail">
             
             <h2 class="title-detail"><%= instituto.nombre %></h2>
@@ -16,34 +17,34 @@
                 <div class="caja-detail-larga">
                     
                 
-                    <div class="caja-detail mini">
-                        <p class="copy-caja-detail">Integrantes</p> 
-                        <p class="copy-number primera"> <%= instituto.institutoIntegrante.length %></p>
+                    <div class="caja-detail mini" id="caja">
+                        <p class="copy-caja-detail">Cargos</p> 
+                        <p class="copy-number"> <%= integrantes %></p>
                         <button class="learn-more">
                             <span class="circle" aria-hidden="true">
                                 <span class="icon arrow"></span>
                             </span>
-                            <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                            <a href="/institutos/d/<%= instituto.id %>/integrantes"><span class="button-text">MÁS INFORMACIÓN</span></a>
                         </button>
                     </div>   
-                    <div class="caja-detail mini">
+                    <div class="caja-detail mini" id="caja">
                         <p class="copy-caja-detail">Proyectos de investigación</p>
-                        <p class="copy-number"> <%= instituto.institutoProyectoInvestigacion.length %></p>
+                        <p class="copy-number" id="counter"> <%= proyectos %></p>
                         <button class="learn-more">
                             <span class="circle" aria-hidden="true">
                                 <span class="icon arrow"></span>
                             </span>
-                            <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                            <a href="/institutos/d/<%= instituto.id %>/proyectos"><span class="button-text">MÁS INFORMACIÓN</span></a>
                         </button>  
                     </div>       
                     <div class="caja-detail mini">
                         <p class="copy-caja-detail">Becarixs</p>
-                        <p class="copy-number"> <%= instituto.institutoProyectoTesis.length %></p>
+                        <p class="copy-number"> <%= becarixs %></p>
                         <button class="learn-more">
                             <span class="circle" aria-hidden="true">
                                 <span class="icon arrow"></span>
                             </span>
-                            <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                            <a href="/institutos/d/<%= instituto.id %>/becarixs"><span class="button-text">MÁS INFORMACIÓN</span></a>
                         </button>  
                     </div>  
 
@@ -53,45 +54,45 @@
 
                 <div class="caja-detail">
                     <p class="copy-caja-detail">Libros</p>
-                    <p class="copy-number"> <%= instituto.institutoLibro.length %></p>
+                    <p class="copy-number"> <%= libros %></p>
                     <button class="learn-more grande">
                         <span class="circle" aria-hidden="true">
                             <span class="icon arrow"></span>
                         </span>
-                        <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                        <a href="/institutos/d/<%= instituto.id %>/publicaciones"><span class="button-text">MÁS INFORMACIÓN</span></a>
                     </button>
                 </div>
 
                 <div class="caja-detail">
                     <p class="copy-caja-detail">Revistas</p>
-                    <p class="copy-number"> <%= instituto.institutoRevista.length %></p>
+                    <p class="copy-number"> <%= revistas %></p>
                     <button class="learn-more grande">
                         <span class="circle" aria-hidden="true">
                             <span class="icon arrow"></span>
                         </span>
-                        <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                        <a href="/institutos/d/<%= instituto.id %>/publicaciones#revistas"><span class="button-text">MÁS INFORMACIÓN</span></a>
                     </button>
                 </div>
 
                 <div class="caja-detail">
                     <p class="copy-caja-detail">Reuniones científicas</p>
-                    <p class="copy-number"> <%= instituto.institutoReunionCientifica.length %></p>
+                    <p class="copy-number"> <%= reuniones %></p>
                     <button class="learn-more grande">
                         <span class="circle" aria-hidden="true">
                             <span class="icon arrow"></span>
                         </span>
-                        <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                        <a href="/institutos/d/<%= instituto.id %>/reuniones"><span class="button-text">MÁS INFORMACIÓN</span></a>
                     </button>
                 </div>
 
                 <div class="caja-detail">
                     <p class="copy-caja-detail">Actividades de extensión</p>
-                    <p class="copy-number"> <%= instituto.institutoActividadExtension.length %></p>
+                    <p class="copy-number"> <%= extension %></p>
                     <button class="learn-more grande">
                         <span class="circle" aria-hidden="true">
                             <span class="icon arrow"></span>
                         </span>
-                        <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                        <a href="/institutos/d/<%= instituto.id %>/reuniones#actividades"><span class="button-text">MÁS INFORMACIÓN</span></a>
                     </button>
                 </div>
 
@@ -99,35 +100,35 @@
                 <div class="caja-detail-larga">
                     
                 
-                    <div class="caja-detail mini">
+                    <div class="caja-detail mini" id="caja">
                         <p class="copy-caja-detail">Relaciones interinstitucionales</p> 
-                        <p class="copy-number"> <%= instituto.institutoConvenio.length %></p>
+                        <p class="copy-number"> <%= cooperacion %></p>
                         <button class="learn-more">
                             <span class="circle" aria-hidden="true">
                                 <span class="icon arrow"></span>
                             </span>
-                            <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                            <a href="/institutos/d/<%= instituto.id %>/relaciones"><span class="button-text">MÁS INFORMACIÓN</span></a>
                         </button>
                       
                     </div>   
                     <div class="caja-detail mini">
                         <p class="copy-caja-detail">Convenios</p>
-                        <p class="copy-number"> <%= instituto.institutoCooperacionIntercambio.length %></p>
+                        <p class="copy-number"> <%= convenios %></p>
                         <button class="learn-more">
                             <span class="circle" aria-hidden="true">
                                 <span class="icon arrow"></span>
                             </span>
-                            <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                            <a href="/institutos/d/<%= instituto.id %>/relaciones#convenios"><span class="button-text">MÁS INFORMACIÓN</span></a>
                         </button>  
                     </div>       
                     <div class="caja-detail mini">
                         <p class="copy-caja-detail">Premios</p>
-                        <p class="copy-number"> <%= instituto.institutoPremio.length %></p>  
+                        <p class="copy-number"> <%= premios %></p>  
                         <button class="learn-more">
                             <span class="circle" aria-hidden="true">
                                 <span class="icon arrow"></span>
                             </span>
-                            <a href="#"><span class="button-text">MÁS INFORMACIÓN</span></a>
+                            <a href="/institutos/d/<%= instituto.id %>/premios"><span class="button-text">MÁS INFORMACIÓN</span></a>
                         </button>
                     </div>  
 

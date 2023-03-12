@@ -10,10 +10,14 @@ const router = require("express").Router();
 router.get("/", indexController.home);
 router.get("/institutos", indexController.institutos)
 router.get("/institutos/d/:id", indexController.detail)
+router.get("/institutos/d/:id/integrantes", indexController.integrantes)
+router.get("/institutos/d/:id/proyectos", indexController.proyectos)
+router.get("/institutos/d/:id/becarixs", indexController.becarixs)
+router.get("/institutos/d/:id/publicaciones", indexController.publicaciones)
+router.get("/institutos/d/:id/reuniones", indexController.reuniones)
+router.get("/institutos/d/:id/premios", indexController.premios)
+router.get("/institutos/d/:id/relaciones", indexController.relaciones)
 
-
-router.get("/ci", indexController.create)
-router.post("/ci", upload.single("logo"), indexController.store)
 
 
 

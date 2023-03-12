@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+
+    <body>
+        <%- include("../partials/header.ejs") %>
+
+
+
+            <main>
+                <section class="form-container">
+                    <h2 class="form-title">Agregar un nuevo cargo</h2>
+
+                    
+                    <form action="/forms/cargo" method="POST">
+
+                        <label for="integrante">Integrante</label>
+                        <select name="integrante" id="integrante">
+                            <option value=""></option>
+                            <% integrantes.forEach(integrante => { %>
+                            <option value="<%= integrante.id %>"><%= integrante.apellido %>, <%= integrante.nombre %></option>
+                            <% }) %>
+
+                        </select>
+
+                        <label for="cargo">Cargo</label>
+                        <select name="cargo" id="cargo">
+                            <option value=""></option>
+                            <% cargos.forEach(cargo => { %>
+                                <option value="<%= cargo.id %>"><%= cargo.nombre %></option>
+                            <% }) %>
+                        </select>
+
+                        <label for="instituto">Instituto</label>
+                        <select name="instituto" id="instituto">
+                            <option value=""></option>
+                            <% institutos.forEach(instituto => { %>
+                                <option value="<%= instituto.id %>"><%= instituto.nombre %></option>
+                            <% }) %>
+                        </select>
+
+
+                        <label for="institución">Institución</label>
+                        <select name="institución" id="institución">
+                            <option value=""></option>
+                            <% instituciones.forEach(institucion => { %>
+                                <option value="<%= institucion.id %>"><%= institucion.nombre %></option>
+                            <% }) %>
+                        </select>
+
+
+
+
+
+                        <button type="submit" class="form-buttton">Agregar cargo</button>
+
+
+                    </form>
+                </section>
+
+            </main>
+
+            <%- include("../partials/footer.ejs") %>
+
+    </body>
+
+</html>

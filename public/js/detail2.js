@@ -1,37 +1,28 @@
-window.addEventListener('DOMContentLoaded', (event) => {
+// window.addEventListener('DOMContentLoaded', (event) => {
 
 
-    let number = document.getElementById('number');
+// Get a reference to the parent element
+// const caja = document.getElementById("caja");
 
-    let start = 0;
-    let end = 3;
-    let ticks = 20;
-    let speed = 50;
-    
-    let randomNumbers = [end]
-    
-    for (let i = 0; i < ticks - 1; i++) {
-      randomNumbers.unshift(
-        Math.floor(Math.random() * (end - start + 1) + start)
-      );
-    }
-    
-    randomNumbers.sort((a, b) => {return a - b});
-    
-    console.log(randomNumbers.length)
-    
-    let x = 0;
-    let interval = setInterval(function () {
-      
-       number.innerHTML = randomNumbers.shift();
-    
-       if (++x === ticks) {
-          window.clearInterval(interval);
-       }
-    
-    }, speed);
+// // Add a mouseenter event listener to the parent element
+// // caja.addEventListener('mouseover', () => {
+
+// //   let proyectos = 0;
+// //   let desiredValue = 3;
+
+// //   let intervalID = setInterval(() => {
+
+// //     proyectos++;
+// //     document.getElementById('counter').textContent = proyectos;
+
+// //     // Check if the proyectos variable has reached the desired value
+// //     if (proyectos === desiredValue) {
+// //       // Stop the animation
+// //       clearInterval(intervalID);
+// //     }
+// //   }, 500);
+// // });
 
 
 
-
-})
+// // })

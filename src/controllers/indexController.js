@@ -1,16 +1,18 @@
 const db = require("../database/models")
 
+const { Op } = require("sequelize");
+
 const indexController = {
 
     home: async (req, res) => {
         try {
 
 
-            let institutos = await db.Instituto.findAll()
+            let institutos = await db.Instituto.count()
 
-            let proyectos = await db.ProyectoInvestigacion.findAll()
+            let proyectos = await db.ProyectoInvestigacion.count()
 
-            let becarios = await db.ProyectoTesis.findAll({
+            let becarios = await db.ProyectoTesis.count({
                 where: {
                     con_beca: 1
                 }
@@ -25,39 +27,6 @@ const indexController = {
 
         }
     },
-    create: (req, res) => {
-        res.render("createInstituto", { title: "Agregar Instituto" })
-    },
-    store: (req, res) => {
-
-        db.Instituto.create(
-            {
-                nombre: req.body.nombre,
-                pertenencia: req.body.pertenencia,
-                horario_atencion: req.body.horarioAtencion,
-                horario_biblioteca: req.body.horarioBiblioteca,
-                email: req.body.email,
-                sede: req.body.sede,
-                direccion: req.body.direccion,
-                telefono: req.body.telefono,
-                pagina_web: req.body.web,
-                imagen: req.file.filename,
-                logo: req.file.filename,
-                facebook: req.body.facebook,
-                instagram: req.body.instagram,
-                twitter: req.body.twitter,
-                youtube: req.body.youtube,
-
-            }
-        )
-            .then(() => {
-                res.redirect("/institutos")
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-
-    },
     json: async (req, res) => {
         let institutos = await db.Instituto.findAll(
             {
@@ -69,13 +38,61 @@ const indexController = {
             }
         )
 
-        let integrantes = await db.Integrante.findAll({
+        let integrantes = await db.Integrante.findAll()
+
+        let cargos = await db.IntegranteHasCargo.findAll({
             include: [{
-                association: "integranteGestion"
+                association: "Integrante"
+            }, {
+                association: "Cargo"
+            }
+            ]
+        })
+
+        let miembros = await db.IntegranteHasProyectoInvestigacion.findAll({
+            include: [{
+                association: "Integrante"
+            }, {
+                association: "ProyectoInvestigacion"
             }]
         })
 
-        res.json(institutos)
+        let tesistas = await db.ProyectoTesis.findAll({
+            where: {
+                con_beca: 1
+            },
+            include: [{
+                association: "proyectoTesisBeca"
+            }, {
+                association: "proyectoTesisIntegrante"
+            }, {
+                association: "proyectoTesisDirector"
+            }, {
+                association: "proyectoTesisCodirector"
+
+            }]
+        })
+
+
+        let reuniones = await db.ReunionCientifica.findAll({
+
+            include: [{
+                association: "reunionCientificaIntegrante1"
+            }, {
+                association: "reunionCientificaIntegrante2"
+            }, {
+                association: "reunionCientificaIntegrante3"
+            }, {
+                association: "reunionCientificaIntegrante4"
+            }
+            ]
+        })
+
+
+  
+
+
+        res.json(miembros)
 
     },
 
@@ -92,19 +109,21 @@ const indexController = {
                         }],
                 }
             )
-    
+
             let integrantes = await db.Integrante.findAll({
                 include: [{
                     association: "integranteGestion"
                 }]
             })
-    
-    
+
+
+
+
             res.render("institutos", { title: "Institutos", institutos: institutos, integrantes: integrantes })
-            
+
         } catch (error) {
             console.log(error);
-            
+
         }
 
 
@@ -112,7 +131,7 @@ const indexController = {
         //     {
         //         include: [
         //             {
-        //                 association: "proyectoInvestigacionInstituto"
+        //                 association: "Integrante"
         //             }, {
         //                 association: "proyectoInvestigacionInstitucion"
         //             }
@@ -213,7 +232,7 @@ const indexController = {
 
 
 
-        // res.json(especialidades)
+        // res.json(proyectosInvestigacion)
 
 
 
@@ -221,31 +240,88 @@ const indexController = {
     detail: async (req, res) => {
         try {
 
-
-
             let instituto = await db.Instituto.findByPk(req.params.id, {
                 include: [{
-                    association: "institutoProyectoInvestigacion"
-                }, {
                     association: "institutoIntegrante"
-                }, {
-                    association: "institutoProyectoTesis"
-                }, {
-                    association: "institutoLibro"
-                }, {
-                    association: "institutoRevista"
-                }, {
-                    association: "institutoReunionCientifica"
-                }, {
-                    association: "institutoActividadExtension"
-                }, {
-                    association: "institutoConvenio"
-                }, {
-                    association: "institutoPremio"
-                }, {
-                    association: "institutoCooperacionIntercambio"
                 }]
             })
+
+            let integrantes = await db.Integrante.count({
+                where: {
+                    [Op.or]: [
+                        {
+                            [Op.and]: [
+                                { instituto1: req.params.id },
+                                { con_cargo: 1 }
+                            ]
+                        },
+                        {
+                            [Op.and]: [
+                                { instituto2: req.params.id },
+                                { con_cargo: 1 }
+                            ]
+                        }
+                    ]
+                }
+            });
+
+            let proyectos = await db.ProyectoInvestigacion.count({
+                where: {
+                    instituto_id: req.params.id
+                }
+            })
+
+            let becarixs = await db.ProyectoTesis.count({
+                where: {
+                    instituto_id: req.params.id
+                }
+            })
+
+            let libros = await db.Libro.count({
+                where: {
+                    instituto_id: req.params.id
+                }
+            })
+
+            let revistas = await db.Revista.count({
+                where: {
+                    instituto_id: req.params.id
+                }
+            })
+
+            let reuniones = await db.ReunionCientifica.count({
+                where: {
+                    instituto_id: req.params.id
+                }
+            })
+
+            let extension = await db.ActividadExtension.count({
+                where: {
+                    instituto_id: req.params.id
+                }
+            })
+
+            let cooperacion = await db.CooperacionIntercambio.count({
+                where: {
+                    instituto_id: req.params.id
+                }
+            })
+
+
+            let convenios = await db.Convenio.count({
+                where: {
+                    instituto_id: req.params.id
+                }
+            })
+
+            let premios = await db.Premio.count({
+                where: {
+                    instituto_id: req.params.id
+                }
+            })
+
+
+
                 .catch((error) => {
                     console.log(error);
                 })
@@ -253,13 +329,391 @@ const indexController = {
 
 
 
-            res.render("detail", { instituto: instituto, title: instituto.nombre })
+
+            res.render("detail", { instituto: instituto, title: instituto.nombre, integrantes: integrantes, proyectos: proyectos, becarixs: becarixs, libros: libros, revistas: revistas, reuniones: reuniones, extension: extension, cooperacion: cooperacion, convenios: convenios, premios: premios })
         }
 
 
         catch (error) {
             console.log(error)
         }
+    },
+
+    integrantes: async (req, res) => {
+
+        try {
+
+            let institutos = await db.Instituto.findByPk(req.params.id, {
+                include: [{
+                    association: "institutoIntegrante"
+                }]
+            })
+
+            let integrantes = await db.Integrante.findAll({
+                where: {
+                    instituto1: req.params.id
+                }, include: [{
+                    association: "integranteFuncion"
+                }]
+            })
+
+            let cargosUBA = await db.IntegranteHasCargo.count({
+                where: {
+                    cargo_id: {
+                        [Op.or]: [6, 7, 8]
+                    },
+                   instituto_id: req.params.id
+                }
+            })
+
+            let cargosCONICET = await db.IntegranteHasCargo.count({
+                where: {
+                    cargo_id: {
+                        [Op.or]: [1, 2, 3, 4, 5]
+                    },
+                    instituto_id: req.params.id
+                }
+            })
+
+            let noDocentes = await db.IntegranteHasCargo.count({
+                where: {
+                    cargo_id: {
+                        [Op.or]: [9, 10, 11, 12, 13, 14, 15, 16]
+                    },
+                    instituto_id: req.params.id
+                }
+            })
+
+            let cpa = await db.IntegranteHasCargo.count({
+                where: {
+                    cargo_id: {
+                        [Op.or]: [17]
+                    },
+                    instituto_id: req.params.id
+                }
+            })
+
+
+            let cargos = await db.IntegranteHasCargo.findAll({
+                where: {
+                    instituto_id: req.params.id
+                },
+                include: [{
+                    association: "Integrante"
+                }, {
+                    association: "Cargo"
+                }]
+            })
+
+
+            res.render("integrantes", { title: "Integrantes", cargos: cargos, institutos: institutos, integrantes: integrantes, cargosUBA: cargosUBA, cargosCONICET: cargosCONICET, noDocentes: noDocentes, cpa: cpa })
+
+
+
+
+        } catch (error) {
+            console.log(error);
+
+        }
+
+
+
+    },
+    proyectos: async (req, res) => {
+        try {
+
+            let ubacyt = await db.ProyectoInvestigacion.count({
+                where: {
+                    tipo_financiacion: "UBACyT",
+                    instituto_id: req.params.id
+                },
+         
+            })
+
+            let filocyt = await db.ProyectoInvestigacion.count({
+                where: {
+                    tipo_financiacion: "FILOCyT",
+                    instituto_id: req.params.id
+                }
+            })
+
+            let pict = await db.ProyectoInvestigacion.count({
+                where: {
+                    tipo_financiacion: "PICT",
+                    instituto_id: req.params.id
+                }
+            })
+
+            let pip = await db.ProyectoInvestigacion.count({
+                where: {
+                    tipo_financiacion: "PIP",
+                    instituto_id: req.params.id
+                }
+            })
+
+            // let otros = await db.ProyectoInvestigacion.count({
+            //     where: {
+            //         tipo_financiacion: {
+            //             [Op.ne]: ["UBACyT", "FILOCyT", "PIP", "PICT"] }
+            //     }
+            // })
+
+
+
+
+            let proyectoMiembros = await db.IntegranteHasProyectoInvestigacion.findAll({
+                include: [{
+                    association: "Integrante"
+                }, {
+                    association: "ProyectoInvestigacion",
+                    where: {
+                        instituto_id: req.params.id
+                    }
+                }]
+            })
+
+            res.render("proyectos", { title: "Proyectos de investigación", proyectoMiembros: proyectoMiembros, ubacyt: ubacyt, filocyt: filocyt, pict: pict, pip: pip })
+
+        } catch (error) {
+            console.log(error);
+
+        }
+    },
+    becarixs: async (req, res) => {
+
+        try {
+
+            let uba = await db.ProyectoTesis.count({
+                where: {
+                    instituto_id: req.params.id,
+                    beca_id: {
+                        [Op.or]: [1, 2, 3, 4, 5]
+                    }
+                }
+
+            })
+
+            let conicet = await db.ProyectoTesis.count({
+                where: {
+                    instituto_id: req.params.id,
+                    beca_id: {
+                        [Op.or]: [6, 7, 8, 10]
+                    }
+                }
+
+            })
+
+
+            let cin = await db.ProyectoTesis.count({
+                where: {
+                    instituto_id: req.params.id,
+                    beca_id: {
+                        [Op.or]: [9, 11]
+                    }
+                }
+
+            })
+
+
+            let agencia = await db.ProyectoTesis.count({
+                where: {
+                    instituto_id: req.params.id,
+                    beca_id: 12
+                }
+
+            })
+
+            let doctoradoUBA = await db.ProyectoTesis.count({
+                where: {
+                    instituto_id: req.params.id,
+                    beca_id: 3
+                }
+            })
+
+
+            let doctoradoCONICET = await db.ProyectoTesis.count({
+                where: {
+                    instituto_id: req.params.id,
+                    beca_id: 6
+                }
+            })
+
+            let tesistas = await db.ProyectoTesis.findAll({
+                where: {
+                    instituto_id: req.params.id,
+                    con_beca: 1
+                },
+                include: [{
+                    association: "proyectoTesisBeca"
+                }, {
+                    association: "proyectoTesisIntegrante"
+                }, {
+                    association: "proyectoTesisDirector"
+                }, {
+                    association: "proyectoTesisCodirector"
+                }]
+            })
+
+
+
+            res.render("becarixs", { title: "Becarixs", uba: uba, conicet: conicet, cin: cin, agencia: agencia, tesistas: tesistas, doctoradoUBA: doctoradoUBA, doctoradoCONICET: doctoradoCONICET })
+
+        } catch (error) {
+            console.log(error);
+
+        }
+
+    },
+    publicaciones: async (req, res) => {
+        try {
+
+            let libros = await db.Libro.findAll({
+                where: {
+                    instituto_id: req.params.id
+                },
+                include: [{
+                    association: "libroIntegrante1"
+                }, {
+                    association: "libroIntegrante2"
+                }, {
+                    association: "libroIntegrante3"
+                }, {
+                    association: "libroIntegrante4"
+                }
+                ]
+            })
+
+
+            let revistas = await db.Revista.findAll({
+                where: {
+                    instituto_id: req.params.id
+                },
+                include: [{
+                    association: "revistaIntegrante1"
+                }, {
+                    association: "revistaIntegrante2"
+                }, {
+                    association: "revistaIntegrante3"
+                }, {
+                    association: "revistaIntegrante4"
+                }
+                ]
+            })
+
+            res.render("publicaciones", { title: "Publicaciones", libros: libros, revistas: revistas })
+
+
+        } catch (error) {
+            console.log(error);
+
+        }
+    },
+    reuniones: async (req, res) => {
+        try {
+
+            let reuniones = await db.ReunionCientifica.findAll({
+                where: {
+                    instituto_id: req.params.id
+                },
+                include: [{
+                    association: "reunionCientificaIntegrante1"
+                },
+                {
+                    association: "reunionCientificaIntegrante2"
+                }, {
+                    association: "reunionCientificaIntegrante3"
+                }, {
+                    association: "reunionCientificaIntegrante4"
+                }]
+            })
+
+            let actividades = await db.ActividadExtension.findAll({
+                where: {
+                    instituto_id: req.params.id 
+                }, 
+                include: [{
+                    association: "actividadExtensionIntegrante1"
+                }, 
+                {
+                    association: "actividadExtensionIntegrante2"
+                },
+                {
+                    association: "actividadExtensionIntegrante3"
+                },
+                {
+                    association: "actividadExtensionIntegrante4"
+                }]
+            })
+
+
+            res.render("reuniones", { title: "Reuniones científicas", reuniones: reuniones, actividades: actividades })
+
+
+        } catch (error) {
+            console.log(error);
+
+        }
+    },
+    premios: async (req, res) => {
+
+        try {
+
+            let premios = await db.Premio.findAll({
+                where: {
+                    instituto_id: req.params.id    
+                },
+                include: [{
+                    association: "premioIntegrante"
+                }]
+            })
+
+
+
+            res.render("premios", {title: "Premios", premios: premios})
+            
+        } catch (error) {
+            console.log(error);
+            
+        }
+
+
+    },
+    relaciones: async (req, res) => {
+
+        try {
+
+            let relaciones = await db.CooperacionIntercambio.findAll({
+                where: {
+                    instituto_id: req.params.id
+                },
+                include: [{
+                    association: "CooperacionIntercambioIntegrante"
+                }]
+            })
+
+            let convenios = await db.Convenio.findAll({
+                where: {
+                    instituto_id: req.params.id
+                }
+            })
+
+            res.render("relaciones", {title: "Relaciones de cooperación e intercambio", relaciones: relaciones, convenios: convenios})
+
+
+
+
+
+
+
+            
+        } catch (error) {
+            console.log(error);
+            
+        }
+
+
+
+
     }
 
 }

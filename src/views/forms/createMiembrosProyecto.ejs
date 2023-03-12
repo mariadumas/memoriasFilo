@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("../partials/head.ejs") %>
+
+</head>
+<body>
+    <%- include("../partials/header.ejs") %>
+
+
+<section class="form-container">
+    <h2 class="form-title">Agregar miembros al proyecto</h2>
+
+    <form action="/forms/cmp" method="post">
+
+    <label for="integrante">Investigadorx</label>
+    <select name="integrante" id="integrante">
+        <option value=""selected></option>
+        <% integrantes.forEach(integrante => { %>
+            <option value="<%= integrante.id %>"><%= integrante.apellido %>, <%= integrante.nombre %></option>  
+        <% }) %>
+
+
+
+
+    </select>
+
+    <label for="proyecto">Proyecto de investigación</label>
+    <select name="proyecto" id="proyecto">
+        <option value=""selected></option>
+        <% proyectos.forEach(proyecto => { %>
+            <option value="<%= proyecto.id %>"><%= proyecto.titulo %></option>
+         
+        <% }) %>
+
+
+    </select>
+
+    <label for="rol">Rol</label>
+    <select name="rol" id="rol">
+        <option value=""selected></option>
+        <option value="Director/a">Director/a</option>
+        <option value="Codirector/a">Codirector/a</option>
+        <option value="Investigador/a">Investigador/a</option>
+    </select>
+
+
+    <button type="submit" class="form-buttton">Agregar miembro</button>
+
+
+    </form>
+
+</section>
+<%- include("../partials/footer.ejs") %>
+</body>
+</html>

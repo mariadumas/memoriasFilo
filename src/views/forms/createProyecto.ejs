@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../partials/head.ejs") %>
+<body>
+    <%- include("../partials/header.ejs") %>
+
+
+    <main>
+        <section class="form-container">
+            <h2 class="form-title">Agregar un nuevo proyecto</h2>
+            <form action="/forms/cp" method="POST">
+                
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" name="titulo">
+                
+                <label for="tipo_financiacion">Tipo de proyecto</label>
+                <select name="tipo_financiacion" id="tipo_financiacion">
+                    <option value=""selected></option>
+                        <option value="UBACyT">UBACyT</option>
+                        <option value="FILOCyT">FILOCyT</option>
+                        <option value="PIP">PIP</option>
+                        <option value="PICT">PICT</option>
+                    </select>
+                
+
+                    <label for="codigo">Código</label>
+                    <input type="text" name="codigo" id="codigo">
+                    
+                    <label for="desde">Año de inicio</label>
+                    <input type="text" name="desde" id="desde">
+
+                    <label for="hasta">Año de finalización</label>
+                    <input type="text" name="hasta" id="hasta">
+                    
+                    <label for="monto">Monto</label>
+                    <input type="text" name="monto" id="monto">
+
+                    <label for="instituto">Instituto</label>
+                    <select name="instituto" id="instituto">
+                        <option value=""selected></option>
+                        <% institutos.forEach(instituto => { %>
+                            <option value="<%= instituto.id %>"><%= instituto.nombre %></option>      
+                        <% }) %>
+                          
+                        </select>
+
+                    
+                    <label for="institucion">Institución que financia</label>
+                        <select name="institucion" id="institucion">
+                        <option value=""selected></option>
+                        <% instituciones.forEach(institucion => { %>
+                            <option value="<%= institucion.id %>"><%= institucion.nombre %></option>
+                         
+                        <% }) %>          
+                    </select>
+                    
+                    <label for="resumen">Resumen</label>
+                   <textarea name="resumen" id="resumen" cols="30" rows="10"></textarea>
+
+
+                                        
+                    <button type="submit" class="form-buttton">Agregar proyecto</button>
+                            
+            </form>
+
+        </section>
+
+
+    </main>
+
+    <%- include("../partials/footer.ejs") %>
+    
+</body>
+</html>

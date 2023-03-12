@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+</head>
+
+<body>
+    <%- include("./partials/header.ejs") %>
+
+        <main class="main-insti">
+            <h2 class="title-detail reuniones">Reuniones científicas</h2>
+
+            <div class="caja-reuniones">
+        
+            <% reuniones.forEach(reunion => { %>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                      <div class="flip-card-front">
+                          <p class="reuniones-titulo"><%= reunion.titulo %></p>
+                          <%
+                          const desde = new Date(reunion.desde + "EDT")
+ 
+                           %>
+                             <%
+                             const hasta = new Date(reunion.hasta + "EDT");
+                             
+                           %>
+                           
+                           <% if (reunion.desde === reunion.hasta) { %>
+                            <p class="date"><%= desde.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) %></p> 
+                           <% } %> 
+ 
+                           <% if (reunion.desde !== reunion.hasta) { %>
+                             <p class="date"><%= desde.toLocaleDateString('es-ES', { day: 'numeric'}) %>
+                             al <%= hasta.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) %></p>
+                           <% } %>
+                      </div>
+                      <div class="flip-card-back">
+
+                        <% if (reunion.reunionCientificaIntegrante1 !== null) { %>
+                                     
+                            <p><b>Organizadorxs:</b></p>
+                            <% } %>
+                            <div>
+                            <% if (reunion.reunionCientificaIntegrante1) { %>
+                               <p class="organizadores"><%= reunion.reunionCientificaIntegrante1.nombre %> <%= reunion.reunionCientificaIntegrante1.apellido %></p> 
+                            <% } %>
+                            <% if (reunion.reunionCientificaIntegrante2) { %>
+                                <p class="organizadores"><%= reunion.reunionCientificaIntegrante2.nombre %> <%= reunion.reunionCientificaIntegrante2.apellido %></p> 
+                             <% } %>
+                             <% if (reunion.reunionCientificaIntegrante3) { %>
+                                <p class="organizadores"><%= reunion.reunionCientificaIntegrante3.nombre %> <%= reunion.reunionCientificaIntegrante3.apellido %></p> 
+                             <% } %>
+                             <% if (reunion.reunionCientificaIntegrante4) { %>
+                                <p class="organizadores"><%= reunion.reunionCientificaIntegrante4.nombre %> <%= reunion.reunionCientificaIntegrante4.apellido %></p> 
+                             <% } %>
+                            </div>
+                                <p class="url"><a href="<%= reunion.url_reunion %>">Más información</a></p> 
+
+
+
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                  
+                  
+                  <% }) %>
+                  
+                  
+                </div>
+                <h2 class="title-detail reuniones" id="actividades">Actividades de extensión y transferencia</h2>
+
+                <div class="caja-reuniones">
+                
+                  <% actividades.forEach(actividad => { %>
+                    <div class="flip-card-actividad">
+                      <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                          <p class="reuniones-titulo"><%= actividad.titulo_actividad %></p>
+                          <p class="descripcion-actividad"><em><%= actividad.descripcion %></em></p>
+                         <% const fecha = new Date(actividad.fecha + "EDT") %> 
+                         <p class="date"><%= fecha.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) %></p> 
+
+                        </div>
+                        <div class="flip-card-back">
+                  
+                          <p class="url"><a href="<%= actividad.url_actividad %>">Más información</a></p>
+
+                          <% if (actividad.url_grabacion !== null) { %>
+
+                            <p class="url"><a href="<%= actividad.url_grabacion%>">VER GRABACIÓN</a></p>
+                          
+                          <% } %>
+                          
+   
+                          
+                          
+                          
+                        </div>
+                      </div>
+                    </div>
+                      <% }) %>
+                    </div>
+                
+
+
+        </main>
+
+
+
+
+
+
+        <%- include("./partials/footer.ejs") %>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"></script>
+
+</body>
+
+</html>

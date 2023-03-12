@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+
+    <body>
+        <%- include("../partials/header.ejs") %>
+
+
+
+            <main>
+                <section class="form-container">
+                    <h2 class="form-title">Agregar un nuevo integrante</h2>
+                    <form action="/forms/cint" method="POST" enctype="multipart/form-data">
+
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre">
+
+                        <label for="apellido">Apellido</label>
+                        <input type="text" id="apellido" name="apellido">
+
+                        <label for="nickname">Alias</label>
+                        <input type="text" name="nickname" id="nickname">
+
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" name="email" id="email">
+
+                        <label for="gender">Género</label>
+                        <select name="gender" id="gender">
+                            <option value="" selected></option>
+                            <option value="0">Masculino</option>
+                            <option value="1">Femenino</option>
+                            <option value="2">No binario</option>
+                        </select>
+
+                        <label for="instituto1">Instituto</label>
+                        <select name="instituto1" id="instituto1">
+                            <option value="" selected></option>
+                            <% institutos.forEach(instituto => { %>
+                                <option value=" <%= instituto.id %>"> <%= instituto.nombre %></option>
+                            <% }) %>
+
+                        </select>
+
+                        <label for="instituto2">Otro instituto</label>
+                        <select name="instituto2" id="instituto2">
+                            <option value="" selected></option>
+                            <% institutos.forEach(instituto => { %>
+                                <option value="<%= instituto.id %>"> <%= instituto.nombre %></option>
+                            <% }) %>
+
+                        </select>
+
+                        <label for="cargo">¿Tiene cargo en el instituto?</label>
+                        <select name="cargo" id="cargo">
+                            <option value="" selected></option>
+                            <option value="0">No</option>
+                            <option value="1">Sí</option>
+                        </select>
+
+
+
+                        <label for="funcion">Función</label>
+                        <select name="funcion1" id="funcion1">
+                            <option value="" ></option>
+                            <% funciones.forEach(funcion => { %>
+                             <option value="<%= funcion.id %>"><%= funcion.nombre %></option>
+                            <% }) %>
+                        </select>
+
+                        <label for="funcion2">Función</label>
+                        <select name="funcion2" id="funcion2">
+                            <option value="" selected></option>
+                            <% funciones.forEach(funcion => { %>
+                                <option value="<%= funcion.id %>"><%= funcion.nombre %></option>
+                               <% }) %>
+
+                        </select>
+
+                        <label for="imagen">Subir una imagen</label>
+                        <input type="file" name="imagen" id="imagen">
+
+
+
+
+                        <button type="submit" class="form-buttton">Agregar integrante</button>
+
+
+                    </form>
+                </section>
+
+            </main>
+
+            <%- include("../partials/footer.ejs") %>
+
+    </body>
+
+</html>

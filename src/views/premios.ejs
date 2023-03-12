@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+</head>
+
+<body>
+    <%- include("./partials/header.ejs") %>
+
+        <main class="main-insti">
+            <h2 class="title-detail reuniones" id="actividades">Premios</h2>
+
+
+            <div class="caja-reuniones">
+
+                <% premios.forEach(premio => { %>
+
+                    <div class="flip-card-premio">
+                        <div class="flip-card-inner">
+                          <div class="flip-card-front">
+                            <p class="reuniones-titulo-premio"><%= premio.nombre %></p>
+                            <p class="url"><%= premio.premioIntegrante.nombre %> <%= premio.premioIntegrante.apellido %></p>
+                          
+                            <% const fecha = new Date(premio.fecha + "EDT") %>
+                            <p class="date"><%= fecha.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) %></p> 
+  
+                          </div>
+                          <div class="flip-card-back">
+                    
+                            <p class="descripcion-actividad"><%= premio.descripcion %></p>
+  
+                         
+  
+                        
+                            
+                  
+                            
+     
+                            
+                            
+                            
+                          </div>
+                        </div>
+                      </div>
+     
+                 
+                <% }) %>
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+        </main>
+
+
+        <%- include("./partials/footer.ejs") %>
+</body>
+
+</html>

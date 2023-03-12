@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head.ejs") %>
+</head>
+<body>
+    <%- include("./partials/header.ejs") %>
+    
+    <main class="main-insti">
+
+        <h2 class="title-detail publi">Libros</h2>
+        <p class="circle">
+            <%= libros.length %>
+        </p>
+
+        <section class="contenedor-publicaciones">
+            <% libros.forEach(libro => { %>        
+                <article class="publicacion">
+                  <div class="img-publicacion-wrapper">
+                      <a href="<%= libro.url_libro %>"><img src="/images/<%= libro.imagen %>" alt=""></a>
+                  </div>
+                  <div class="copy-publicacion">
+                    <a href="<%= libro.url_libro %>"><p class="titulo-publicaciones"><em><%= libro.titulo %></em></p></a>
+                    <p><%= libro.libroIntegrante1.nombre%> <%=libro.libroIntegrante1.apellido%>
+                    <% if (libro.libroIntegrante2) { %>
+                    , <%= libro.libroIntegrante2.nombre%> <%= libro.libroIntegrante2.apellido %>
+                    <% } %>
+                    <% if (libro.libroIntegrante3) { %>
+                       , <%= libro.libroIntegrante3.nombre%> <%= libro.libroIntegrante3.apellido %>
+                    <% } %>
+                    <% if (libro.libroIntegrante4) { %>
+                       , <%= libro.libroIntegrante4.nombre%> <%= libro.libroIntegrante4.apellido %></p>
+                    <% } %>
+                    <p> <%= libro.ciudad %>: <%= libro.editorial %>, <%= libro.year %></p>
+                  </div>
+      
+                </article>
+            <% }) %>
+
+                            
+
+        </section>
+
+
+        <h2 class="title-detail publi" id="revistas">Revistas</h2>
+        <p class="circle">
+            <%= revistas.length %>
+        </p>
+
+
+        <section class="contenedor-publicaciones">
+            <% revistas.forEach(revista => { %>        
+                <article class="publicacion">
+                  <div class="img-publicacion-wrapper">
+                      <a href="<%= revista.url_revista %>"><img src="/images/<%= revista.imagen %>" alt=""></a>
+                  </div>
+                  <div class="copy-publicacion">
+                    <a href="<%= revista.url_revista %>"><p class="titulo-publicaciones"><em><%= revista.titulo_volumen %></em></p></a>
+                    <p>Volumen <%= revista.volumen %><% if (revista.numero) { %>
+                            , <%= revista.numero %>
+                    <% } %>, <%= revista.fecha %> </p>
+                    <% if (revista.revistaIntegrante1) { %>  
+                        <p><%= revista.revistaIntegrante1.nombre%> <%=revista.revistaIntegrante1.apellido%>
+                    <% } %>
+                    <% if (revista.revistaIntegrante2) { %>
+                    , <%= revista.revistaIntegrante2.nombre%> <%= revista.revistaIntegrante2.apellido %>
+                    <% } %>
+                    <% if (revista.revistaIntegrante3) { %>
+                       , <%= revista.revistaIntegrante3.nombre%> <%= revista.revistaIntegrante3.apellido %>
+                    <% } %>
+                    <% if (revista.revistaIntegrante4) { %>
+                       , <%= revista.revistaIntegrante4.nombre%> <%= revista.revistaIntegrante4.apellido %></p>
+                    <% } %>
+                  </div>
+      
+                </article>
+            <% }) %>
+
+                            
+
+        </section>
+
+    
+
+
+
+
+
+
+
+
+    </main>
+    <%- include("./partials/footer.ejs") %>
+
+</body>
+</html>

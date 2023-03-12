@@ -70,6 +70,14 @@ module.exports = (sequelize, DataTypes) => {
             as: "proyectoTesisIntegrante",
             foreignKey: "investigador"
         })
+        ProyectoTesis.belongsTo(models.Integrante, {
+            as: "proyectoTesisDirector",
+            foreignKey: "director"
+        })
+        ProyectoTesis.belongsTo(models.Integrante, {
+            as: "proyectoTesisCodirector",
+            foreignKey: "codirector"
+        })
         ProyectoTesis.belongsTo(models.Instituto, {
             as: "proyectoTesisInstituto",
             foreignKey: "instituto_id"

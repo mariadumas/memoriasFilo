@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+</head>
+
+<body>
+    <%- include("./partials/header.ejs") %>
+
+        <main class="main-insti">
+            <h2 class="title-detail reuniones" id="actividades">Relaciones interinstitucionales</h2>
+
+
+            <div class="caja-reuniones">
+
+                <% relaciones.forEach(relacion=> { %>
+
+                    <div class="flip-card-premio">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <p class="reuniones-titulo-premio">
+                                    <%= relacion.institucion_target %>
+                                </p>
+                                <p class="url">
+                                    <%= relacion.CooperacionIntercambioIntegrante.nombre %>
+                                        <%= relacion.CooperacionIntercambioIntegrante.apellido %>
+                                </p>
+
+
+                                <p class="date">
+                                    <%= relacion.desde %> - <%= relacion.hasta %>
+                                </p>
+
+                            </div>
+                            <div class="flip-card-back">
+
+                                <p class="descripcion-actividad">
+                                    <%= relacion.descripcion %>
+                                </p>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <% }) %>
+
+
+            </div>
+
+
+
+            <h2 class="title-detail reuniones" id="convenios">Convenios</h2>
+
+            <% if (convenios <= 0) { %>
+
+                <p class="zero">No se firmaron convenios en este período</p>
+
+                <% } else { %>
+
+
+
+                    <% convenios.forEach(convenio=> { %>
+
+
+
+                        <div class="flip-card-premio">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <p class="reuniones-titulo-premio">
+                                        <%= convenio.institucion_target %>
+                                    </p>
+                                    <p class="url">
+                                        <%= convenio.nombre %>
+                                    </p>
+
+
+                                    <p class="date">
+                                        <%= convenio.desde %> - <%= convenio.hasta %>
+                                    </p>
+
+                                </div>
+                                <div class="flip-card-back">
+
+                                    <p class="descripcion-actividad">
+                                        <%= convenio.descripcion %>
+                                    </p>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <% }) %>
+
+
+                            <% } %>
+                            
+                            </main>
+
+
+                                <%- include("./partials/footer.ejs") %>
+</body>
+
+</html>

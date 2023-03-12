@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         funcion2_id: {
             type: DataTypes.INTEGER.UNSIGNED
-        },
+        }
 
     };
 
@@ -86,6 +86,14 @@ module.exports = (sequelize, DataTypes) => {
         Integrante.hasMany(models.ProyectoTesis, {
             as: "integranteProyectoTesis",
             foreignKey: "investigador"
+        })
+        Integrante.hasMany(models.ProyectoTesis, {
+            as: "directorProyectoTesis",
+            foreignKey: "director"
+        })
+        Integrante.hasMany(models.ProyectoTesis, {
+            as: "codirectorProyectoTesis",
+            foreignKey: "codirector"
         })
         Integrante.belongsToMany(models.ProyectoInvestigacion, {
             through: "IntegranteHasProyectoInvestigacion",
